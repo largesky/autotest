@@ -1,0 +1,36 @@
+		 --------------------------------------------------
+                       USBXpress Development Kit v3.5.1 Upgrade Notes
+                       Copyright (C) 2011 Silicon Laboratories, Inc.
+		 --------------------------------------------------
+
+
+USBXpress Firmware Library v3.5.1 Release
+---------------------------------------
+
+Relevant devices: C8051F320/1, 'F326/7, 'F340/1/2/3/4/5/6/7/8/9/A/B/C/D, 'F380/1/2/3/4/5/6/7, 'T320/1/2/3/6/7, 'T620/1/2/3/4]:
+
+***Firmware library release*** No changes to the firmware libraries were made between USBXpress release v2.4 and v3.2.
+
+->> Please note that three separate USBXpress firmware libraries have been included, one for each USB MCU family ('F320/1, 'F326/7, 'F34x).
+->> The latest release can always be found at this link: http://www.silabs.com/mcudownloads
+
+->> To upgrade your application from USBXpress v1.x to v2.0/v2.1, follow the steps in this MCU KB article:
+http://portal.knowledgebase.net/article.asp?article=133353&p=4120
+
+->> If your application is using USBXpress v2.x (x < 3), use the following steps to upgrade to the latest USBXpress firmware library:
+1. Add a call to USB_Clock_Start() before the USB_Init() call.
+2. Explicitly specify each parameter for USB_Init (Default values and null pointers are no longer supported).
+3. Remove USB_API.LIB from your project build, and add USBX_F320_1.LIB.
+4. Replace your existing USB_API.h with the one in this package (USBXpress_API\F32x_Device\).
+
+->> Refer to the updated Testpanel and FileTransfer examples in this package that already incorporate the above steps.
+->> Please refer to the updated AN169.pdf "USBXpress Programmer's Guide" for more details.
+
+
+Important note about the USBXpress API interrupt:
+--------------------------------------------------
+C8051F320/1 and C8051F326/7 device libraries use "interrupt 16" (interrupt vector at 0x0083).
+C8051F34x, 'F38x, 'T32x, 'T62x device library uses "interrupt 17" (interrupt vector at 0x008B).
+
+Note: The C8051F34x device library is compatible with the C8051F320/1 devices.
+The C8051F320/1 device library is NOT compatible with the C8051F34x devices.

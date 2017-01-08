@@ -1,0 +1,39 @@
+﻿<Window x:Class="Mengsk.Device.Devices.UI.DeviceConfigOne"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wpfextenedpropertygrid="clr-namespace:Xceed.Wpf.Toolkit.PropertyGrid;assembly=Xceed.Wpf.Toolkit"
+        Title="DeviceConfigOne" Height="700" Width="520" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ComboBox Name="cbbBuses" Margin="3" VerticalAlignment="Center" DisplayMemberPath="ReadableValue" SelectionChanged="cbbBuses_SelectionChanged"/>
+        <ListBox Grid.Row="1" Margin="3" Name="lstBuses">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Expander Header="{Binding ReadableValue}" IsExpanded="True">
+                                    <wpfextenedpropertygrid:PropertyGrid DataContext="{Binding}" PropertyChanged="PropertyGrid_PropertyChanged"  SelectedObject="{Binding}" ShowSearchBox="False" ShowSortOptions="False" ShowTitle="False" >
+                                    </wpfextenedpropertygrid:PropertyGrid>
+                                </Expander>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+
+        <GridSplitter Grid.Row="2" Height="5" HorizontalAlignment="Stretch"/>
+        
+        <Expander Grid.Row="3" Header="设备属性" Margin="3" IsExpanded="True">
+            <wpfextenedpropertygrid:PropertyGrid x:Name="pgDeviceInfo" ShowSearchBox="False" ShowSortOptions="False" ShowTitle="False"/>
+        </Expander>
+        <Button Grid.Row="4" HorizontalAlignment="Right" Content="确定" Name="btnOK" Margin="3,3,100,3" Width="60" Click="btnOK_Click"/>
+    </Grid>
+</Window>
